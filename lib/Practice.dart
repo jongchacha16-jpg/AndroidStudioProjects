@@ -1258,6 +1258,7 @@ class Salary {
     }
   }
 }
+
 //// Null이 올 수 있도록 타입을 (String?, int?) 처럼 허용하거나 기본값(default) 설정하기
 // (String, int) studentInfoSafe(Map<String, dynamic> json) {
 //   // ?? 기호를 써서 데이터가 없거나 잘못되었을 때의 기본값을 지정해주면 훨씬 안전합니다.
@@ -1266,11 +1267,248 @@ class Salary {
 //
 //   return (name, age);
 // }
+/*
 (String, int, String) userInfo(Map<String, dynamic> json) {
   return (json['name'] as String, json['age'] as int, json['color'] as String);
 }
 
 var json ={'name' :'John','age':10,'color':'blue'};
-var value = userInfo(json);
+ */
+Stream<int> errorStream() async* {
+  yield 1;
+  yield 2;
+  throw Exception("3");
+  yield 4;
+}
 
+Stream<String> tiktok() async* {
+  for (int i = 0; i < 10; i++) {
+    await Future.delayed(Duration(seconds: 2));
+    yield (i % 2 == 0) ? "tik" : "tok";
+  }
+}
 
+abstract class Base {
+  abstract int a;
+
+  void foo(); // abstract
+  void bar() => print('bar'); // concrete
+}
+
+class Subclass extends Base {
+  @override
+  int a = 3;
+  @override
+  void foo() => print('foo');
+  void aPrint(){
+    print(a);
+  }
+  // bar()는 선택 사항
+}
+class User{
+  final String name;
+  final int age;
+  User({required this.name,required this.age});
+  String abc(){
+    return "abc";
+  }
+  @override
+  String toString() =>'User(name:$name,age: $age,abd :${abc()})';
+}
+class Rectangle1{
+  double width;
+  double height;
+  Rectangle1({required this.width,required this.height});
+  double get area => width * height;
+  @override
+  String toString() {
+    return "Rectangle($width x $height), area: $area";
+  }
+}
+class Temperature{
+  final double celsius;
+
+  Temperature(this.celsius);
+  Temperature.fromFahrenheit(double fahrenheit)
+      :celsius = (fahrenheit - 32) / 1.8;
+
+  @override
+  String toString() {
+    return "섭씨: $celsius도";
+  }
+}
+class Point3D{
+  final double x;
+  final double y;
+  final double z;
+  const Point3D(this.x,this.y,this.z);
+  Point3D.origin()
+      :x = 0,y =0,z=0;
+  Point3D.from2D(this.x,this.y)
+      :z = 0;
+  @override
+  String toString() {
+    return "Point3D(x:$x,y:$y,z:$z)";
+  }
+}
+abstract class Animal{
+  Animal(this.name);
+  final String name;
+  void speak(){
+    print("동물이 소리를 낸다");
+  }
+}
+class Dog extends Animal{
+  Dog(super.name);
+  @override
+  void speak(){
+    print("멍멍! 나는 $name입니다.");
+  }
+}
+abstract class Shape{
+  double area() => 0;
+}
+class Circle extends Shape{
+  double radius;
+  Circle(this.radius);
+  @override
+  double area(){
+    double result = pi * radius * radius;
+    return result;
+  }
+}
+abstract class Shape1{
+  double getArea();
+  String describe();
+}
+class Circle1 extends Shape1{
+  final double radius;
+  Circle1(this.radius);
+
+  @override
+  double getArea(){
+    double area = pi * radius * radius;
+    return area;
+  }
+
+  @override
+  String describe(){
+    return "Circle의 radius는 $radius";
+  }
+
+  @override
+  String toString() {
+    return "Circle with area: ${getArea()}";
+  }
+}
+class Rectangle2 extends Shape1{
+  final double width;
+  final double height;
+  Rectangle2(this.width,this.height);
+  @override
+  double getArea(){
+    double area = width * height;
+    return area;
+  }
+  @override
+  String describe(){
+    return "Rectangle의 width는 $width height는 $height";
+  }
+  @override
+  String toString() {
+    return "Rectangle with area: ${getArea()}";
+  }
+}
+abstract interface class JsonSerializable{
+  Map<String,dynamic> toJson();
+  void fromJson(Map<String,dynamic>json);
+}
+class User1 implements JsonSerializable{
+  String name;
+  int age;
+  User1(this.name, this.age);
+  @override
+  Map<String,dynamic> toJson(){
+    return {'name': name, 'age': age};
+  }
+  @override
+  void fromJson(Map<String,dynamic>json){
+    name = json['name'];
+    age = json['age'];
+  }
+  @override
+  String toString() =>"User(name: $name,age: $age)";
+}
+class Employee1{
+  final String name;
+  final double baseSalary;
+  Employee1(this.name,this.baseSalary);
+  double getSalary(){
+    return baseSalary;
+  }
+}
+class Manager extends Employee1{
+  final int teamSize;
+  Manager(super.name,super.baseSalary,this.teamSize);
+  @override
+  double getSalary(){
+    return baseSalary + 100 * teamSize;
+  }
+}
+class Director extends Manager{
+  final double stockOption;
+  Director(super.name, super.baseSalary, super.teamSize,this.stockOption);
+  @override
+  double getSalary() {
+    return super.getSalary() + stockOption;
+  }
+}
+abstract class Notifier{
+  void notify(String msg){
+    print("Sending: $msg");
+  }
+}
+class SlackNotifier implements Notifier{
+  final String channel;
+  SlackNotifier(this.channel);
+  @override
+  void notify(String msg){
+    print("Slack[$channel]: $msg");
+  }
+}
+class BufferedNotifier extends Notifier{
+  final List<String> message= [];
+  @override
+  void notify(String msg){
+    message.add(msg);
+  }
+  void flush(){
+    message.forEach(super.notify);
+    message.clear();
+  }
+}
+enum Planet{
+  mercury(57.9,2439.7),
+  venus(108.2,6051.8),
+  earth(149.6,6371),
+  mars(227.9,3389.5);
+
+  final double fromSun;
+  final double planetRadius;
+
+  const Planet(this.fromSun,this.planetRadius);
+  //getter의 경우도 method로 인식한다.
+  double get planetRadiusValue =>  4 * pi * planetRadius * planetRadius;
+}
+enum TaskStatus{
+  notStated("Task not started"),
+  inProgress("Task in progress"),
+  completed("Task completed"),
+  blocked("Task is blocked");
+
+  final String description;
+  const TaskStatus(this.description);
+  bool get isCompleted => TaskStatus.values.contains(completed);
+  @override
+  String toString() => description;
+}

@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:android_studio_projects/Practice.dart';
-import 'package:android_studio_projects/android_studio_projects.dart';
 
 void main(List<String> arguments) {
   /*
@@ -258,5 +257,59 @@ print(s.checkSalary);
     print("비밀번호 설정이 완료되었습니다.");
   }
    */
-  print(value);
+  // var (name,age,color) = userInfo(json);
+  /*
+  Stream<String> streamGreeting() async*{
+    for(int i=0;i<3;i++){
+      await Future.delayed(Duration(seconds:1));
+      yield "Hello, World";
+    }
+  }
+  Stream<String> box = streamGreeting();
+  box.listen((String value){
+    print(value);
+  });
+   */
+  /*
+  Stream<int> box = errorStream();
+  box.listen((int value) {
+    print(value);
+  }, onError: (error) {
+    print("Caught an error: $error");
+  }, onDone: () {
+    print("Stream is Done");
+  });
+   */
+  /*
+  Stream<String> box = tiktok();
+  box.listen((String value) {
+    print(value);
+  }, onDone: () {
+    print("Stream is Done");
+  });
+   */
+  // Subclass sc = Subclass();
+  // sc.aPrint();
+  /*
+  final user = User1("홍길동",20);
+  final json = user.toJson();
+  print(json);
+
+  final user2 = User1('',0);
+  user2.fromJson({'name': "이순신",'age':30});
+  print(user2);
+  */
+  /*
+  final s = SlackNotifier('geneeral');
+  s.notify("Hello!");
+  final b = BufferedNotifier();
+  b.notify('msg1');
+  b.notify('msg2');
+  print(b.message);
+  b.flush();
+   */
+  for (var i in Planet.values) {
+    print("${i}의 표면적은: ${i.planetRadiusValue}");
+  }
+  print("작업 완료 여부: ${TaskStatus.completed.isCompleted} 세부사항: ${TaskStatus.completed}");
 }
