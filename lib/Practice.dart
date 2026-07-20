@@ -1512,3 +1512,103 @@ enum TaskStatus{
   @override
   String toString() => description;
 }
+final sayHi = (nickname) => "Hi, $nickname";
+final String Function(String) sayHi1 = (String nickname) =>"Hello, $nickname";
+
+typedef Greet = String Function(String);
+//typedef String Greet(String name);
+void welcome(Greet greet,String nickname){
+  print(greet(nickname));
+  print("Welcome!");
+}
+// typedef f = void Function();
+typedef void f();
+void runCallback(void Function() printCallback){
+  print("Before callback");
+  printCallback();
+  print("Before callback");
+}
+void printMessage(){
+  print("Hello from callback!");
+}
+
+typedef void IntCallback(int);
+void process(IntCallback printCallback){
+  for(int i=0; i<3;i++){
+    printCallback(i);
+  }
+}
+int multiply(int a,int b) => a * b;
+
+String value = 'Hello';
+String toUpper(s) => s.toUpperCase();
+String addBrackets(s) => '[$s]';
+String addExclamation(s) => '$s!';
+
+typedef String Formatter(String value);
+void formatAndPrint(Formatter f,String value){
+  print(f(value));
+}
+
+Function makeCounter(){
+  int count = 0;
+  return(){
+    count++;
+    print(count);
+  };
+}
+
+void greetUser(String name){
+  String upperName = name.toUpperCase();
+  void greetName(upperName){
+    print("HELLO, $upperName!");
+  }
+  greetName(upperName);
+}
+
+void runTwice(void Function() f){
+  f();
+  f();
+}
+
+void runWithMessage(String message,void Function() f){
+  print(message);
+  f();
+}
+typedef functiontype = void Function(String s);
+void runWithMessage1(functiontype f){
+  print("Start");
+  f("from callback");
+}
+typedef trasformSquare = int Function(int);
+
+int squareNum(int num) {
+  int squareNum = num * num;
+  return squareNum;
+}
+
+int calculateAll(List<int> numbers, trasformSquare f) {
+  final transformed = numbers.map(f).toList();
+  int sumNum = transformed.fold(0, (i, k) => i + k);
+  return sumNum;
+}
+typedef BoolCheck = bool Function(int);
+List<int> filterByConditions(List<int> numbers, List<BoolCheck> functions) {
+  return numbers.where((number) {
+    for (var condition in functions) {
+      if (!condition(number)) return false;
+    }
+    return true;
+  }).toList();
+}
+typedef emptyf = void Function();
+void runTaskWithState(String taskName,emptyf f){
+  f();
+}
+emptyf createTaskRunner(String taskName){
+  int count = 0;
+  return() {
+    count ++;
+    print("[$taskName] 실행 횟수: $count");
+  };
+}

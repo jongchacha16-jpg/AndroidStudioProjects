@@ -308,8 +308,99 @@ print(s.checkSalary);
   print(b.message);
   b.flush();
    */
+  /*
   for (var i in Planet.values) {
     print("${i}의 표면적은: ${i.planetRadiusValue}");
   }
   print("작업 완료 여부: ${TaskStatus.completed.isCompleted} 세부사항: ${TaskStatus.completed}");
+   */
+  // final sayHi = (String nickname) => "Hi, $nickname";
+  // welcome(sayHi, "Modoo");
+  // runCallback(printMessage);
+  // process((value){print("Callback with value: $value");});
+  /*
+  const multiplier = 10;
+  const list =[1,2,3];
+  final result = list.map((x){return x * multiplier;});
+  print(result);
+  */
+  /*
+  print(multiply(3,4));
+
+  String value = "Hello";
+  formatAndPrint(toUpper, value);
+  formatAndPrint(addBrackets, value);
+  formatAndPrint(addExclamation, value);
+  */
+  /*
+  final counterA = makeCounter();
+  final counterB = makeCounter();
+
+  counterA();
+  counterA();
+  counterB();
+  counterB();
+  */
+  // greetUser('modoo');
+  /*
+  void sayHi(){
+    print("Hi!");
+  }
+  runTwice(sayHi);
+   */
+  // runWithMessage("Start", (){print("Callback executed");});
+  /*
+  void printUpper(String message){
+    print(message.toUpperCase());
+  }
+  runWithMessage1(printUpper);
+  */
+  // final result = calculateAll([1,2,3,4,5], squareNum);
+  // print(result);
+  /*
+  bool someFunction1(int num1){
+    //홀수
+    return num1 % 2 == 1;
+  }
+  bool someFunction2(int num2){
+    //5보다 큰 값
+    return num2 > 5;
+  }
+  var result = filterByConditions([1,2,3,4,5,6,7,8,9],[someFunction1,someFunction2]);
+  print(result);
+   */
+  /*
+  final uploadTask = createTaskRunner("upload");
+  runTaskWithState('upload', uploadTask);
+  runTaskWithState('upload', uploadTask);
+  */
+  /*
+  List<String> a = ["alice","bob","chris"];
+  final l =a.map((name){
+    String firstNameUpper = name.replaceFirst(name[0],name[0].toUpperCase());
+    return "Hello, ${firstNameUpper}!";
+  });
+   */
+  /*
+  List<String> s =["admin","user","guest"];
+  bool l = s.any((a)=>a.contains("admin"));
+  l == true ? print("관리자 접근 허용") : print("일반 사용자 전용");
+   */
+  /*
+List<int>a = [0,1,2,3,5,8,32,44,55,79];
+List<int>b = [9,2,3,4,5,6,7,8,55,10,32,13];
+final l = a.where((element)=>b.contains(element));
+print(l);
+   */
+  final List<String> acceptedCountryNum = ["+1","+44","+82"];
+  // 예시 데이터
+  final phones = [
+    '+82-1234-5678',
+    '+1-555-1234',
+    '+998-1111-2222',
+    '+91-9999-0000',
+    '+44-9876-5432',
+  ];
+  final unacceptedCountryNum = phones.map((phone)=>phone.split('-').first).where((code)=>!acceptedCountryNum.contains(code));
+  print(unacceptedCountryNum);
 }
