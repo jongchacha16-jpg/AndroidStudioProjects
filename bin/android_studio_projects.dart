@@ -160,7 +160,7 @@ myBankAccount.deposit();
 myBankAccount.withdraw();
 myBankAccount.displayAccountInfo();}$
    */
-/*
+  /*
   Car1 car_1 = Car1(brand: "Toyota",model: "Camry",year: 2021,price: 30000,isAvailable: false);
   print("렌트 ${car_1.stateCar}");
   car_1.getCar();
@@ -392,7 +392,8 @@ List<int>b = [9,2,3,4,5,6,7,8,55,10,32,13];
 final l = a.where((element)=>b.contains(element));
 print(l);
    */
-  final List<String> acceptedCountryNum = ["+1","+44","+82"];
+  /*
+  final List<String> acceptedCountryNum = ["+1", "+44", "+82"];
   // 예시 데이터
   final phones = [
     '+82-1234-5678',
@@ -401,6 +402,30 @@ print(l);
     '+91-9999-0000',
     '+44-9876-5432',
   ];
-  final unacceptedCountryNum = phones.map((phone)=>phone.split('-').first).where((code)=>!acceptedCountryNum.contains(code));
+  final unacceptedCountryNum = phones
+      .map((phone) => phone.split('-').first)
+      .where((code) => !acceptedCountryNum.contains(code));
   print(unacceptedCountryNum);
+   */
+  /*
+  final data = MyData(100);
+  if (data case MyData(value: var x) when x % 2 == 0) {
+    print('짝수 입니다.');
+  }
+   */
+  /*
+  var people = [('철수', 20), ('영희', 22)];
+  for (var (name, age) in people) {
+    print('$name는 $age살 입니다.');
+  }
+   */
+  /*
+  var users = [
+    {'name': 'Alice', 'location': 'Seoul'},
+    {'name': 'Bob', 'location': 'Busan'},
+  ];
+  for (var {'name': name, 'location': location} in users) {
+    print('$name는 $location에 거주합니다.');
+  }
+   */
 }

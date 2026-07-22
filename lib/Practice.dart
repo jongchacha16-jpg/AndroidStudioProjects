@@ -1300,99 +1300,109 @@ class Subclass extends Base {
   int a = 3;
   @override
   void foo() => print('foo');
-  void aPrint(){
+  void aPrint() {
     print(a);
   }
+
   // bar()는 선택 사항
 }
-class User{
+
+class User {
   final String name;
   final int age;
-  User({required this.name,required this.age});
-  String abc(){
+  User({required this.name, required this.age});
+  String abc() {
     return "abc";
   }
+
   @override
-  String toString() =>'User(name:$name,age: $age,abd :${abc()})';
+  String toString() => 'User(name:$name,age: $age,abd :${abc()})';
 }
-class Rectangle1{
+
+class Rectangle1 {
   double width;
   double height;
-  Rectangle1({required this.width,required this.height});
+  Rectangle1({required this.width, required this.height});
   double get area => width * height;
   @override
   String toString() {
     return "Rectangle($width x $height), area: $area";
   }
 }
-class Temperature{
+
+class Temperature {
   final double celsius;
 
   Temperature(this.celsius);
   Temperature.fromFahrenheit(double fahrenheit)
-      :celsius = (fahrenheit - 32) / 1.8;
+    : celsius = (fahrenheit - 32) / 1.8;
 
   @override
   String toString() {
     return "섭씨: $celsius도";
   }
 }
-class Point3D{
+
+class Point3D {
   final double x;
   final double y;
   final double z;
-  const Point3D(this.x,this.y,this.z);
-  Point3D.origin()
-      :x = 0,y =0,z=0;
-  Point3D.from2D(this.x,this.y)
-      :z = 0;
+  const Point3D(this.x, this.y, this.z);
+  Point3D.origin() : x = 0, y = 0, z = 0;
+  Point3D.from2D(this.x, this.y) : z = 0;
   @override
   String toString() {
     return "Point3D(x:$x,y:$y,z:$z)";
   }
 }
-abstract class Animal{
+
+abstract class Animal {
   Animal(this.name);
   final String name;
-  void speak(){
+  void speak() {
     print("동물이 소리를 낸다");
   }
 }
-class Dog extends Animal{
+
+class Dog extends Animal {
   Dog(super.name);
   @override
-  void speak(){
+  void speak() {
     print("멍멍! 나는 $name입니다.");
   }
 }
-abstract class Shape{
+
+abstract class Shape {
   double area() => 0;
 }
-class Circle extends Shape{
+
+class Circle extends Shape {
   double radius;
   Circle(this.radius);
   @override
-  double area(){
+  double area() {
     double result = pi * radius * radius;
     return result;
   }
 }
-abstract class Shape1{
+
+abstract class Shape1 {
   double getArea();
   String describe();
 }
-class Circle1 extends Shape1{
+
+class Circle1 extends Shape1 {
   final double radius;
   Circle1(this.radius);
 
   @override
-  double getArea(){
+  double getArea() {
     double area = pi * radius * radius;
     return area;
   }
 
   @override
-  String describe(){
+  String describe() {
     return "Circle의 radius는 $radius";
   }
 
@@ -1401,106 +1411,122 @@ class Circle1 extends Shape1{
     return "Circle with area: ${getArea()}";
   }
 }
-class Rectangle2 extends Shape1{
+
+class Rectangle2 extends Shape1 {
   final double width;
   final double height;
-  Rectangle2(this.width,this.height);
+  Rectangle2(this.width, this.height);
   @override
-  double getArea(){
+  double getArea() {
     double area = width * height;
     return area;
   }
+
   @override
-  String describe(){
+  String describe() {
     return "Rectangle의 width는 $width height는 $height";
   }
+
   @override
   String toString() {
     return "Rectangle with area: ${getArea()}";
   }
 }
-abstract interface class JsonSerializable{
-  Map<String,dynamic> toJson();
-  void fromJson(Map<String,dynamic>json);
+
+abstract interface class JsonSerializable {
+  Map<String, dynamic> toJson();
+  void fromJson(Map<String, dynamic> json);
 }
-class User1 implements JsonSerializable{
+
+class User1 implements JsonSerializable {
   String name;
   int age;
   User1(this.name, this.age);
   @override
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {'name': name, 'age': age};
   }
+
   @override
-  void fromJson(Map<String,dynamic>json){
+  void fromJson(Map<String, dynamic> json) {
     name = json['name'];
     age = json['age'];
   }
+
   @override
-  String toString() =>"User(name: $name,age: $age)";
+  String toString() => "User(name: $name,age: $age)";
 }
-class Employee1{
+
+class Employee1 {
   final String name;
   final double baseSalary;
-  Employee1(this.name,this.baseSalary);
-  double getSalary(){
+  Employee1(this.name, this.baseSalary);
+  double getSalary() {
     return baseSalary;
   }
 }
-class Manager extends Employee1{
+
+class Manager extends Employee1 {
   final int teamSize;
-  Manager(super.name,super.baseSalary,this.teamSize);
+  Manager(super.name, super.baseSalary, this.teamSize);
   @override
-  double getSalary(){
+  double getSalary() {
     return baseSalary + 100 * teamSize;
   }
 }
-class Director extends Manager{
+
+class Director extends Manager {
   final double stockOption;
-  Director(super.name, super.baseSalary, super.teamSize,this.stockOption);
+  Director(super.name, super.baseSalary, super.teamSize, this.stockOption);
   @override
   double getSalary() {
     return super.getSalary() + stockOption;
   }
 }
-abstract class Notifier{
-  void notify(String msg){
+
+abstract class Notifier {
+  void notify(String msg) {
     print("Sending: $msg");
   }
 }
-class SlackNotifier implements Notifier{
+
+class SlackNotifier implements Notifier {
   final String channel;
   SlackNotifier(this.channel);
   @override
-  void notify(String msg){
+  void notify(String msg) {
     print("Slack[$channel]: $msg");
   }
 }
-class BufferedNotifier extends Notifier{
-  final List<String> message= [];
+
+class BufferedNotifier extends Notifier {
+  final List<String> message = [];
   @override
-  void notify(String msg){
+  void notify(String msg) {
     message.add(msg);
   }
-  void flush(){
+
+  void flush() {
     message.forEach(super.notify);
     message.clear();
   }
 }
-enum Planet{
-  mercury(57.9,2439.7),
-  venus(108.2,6051.8),
-  earth(149.6,6371),
-  mars(227.9,3389.5);
+
+enum Planet {
+  mercury(57.9, 2439.7),
+  venus(108.2, 6051.8),
+  earth(149.6, 6371),
+  mars(227.9, 3389.5);
 
   final double fromSun;
   final double planetRadius;
 
-  const Planet(this.fromSun,this.planetRadius);
+  const Planet(this.fromSun, this.planetRadius);
   //getter의 경우도 method로 인식한다.
-  double get planetRadiusValue =>  4 * pi * planetRadius * planetRadius;
+  double get planetRadiusValue => 4 * pi * planetRadius * planetRadius;
 }
-enum TaskStatus{
+
+enum TaskStatus {
   notStated("Task not started"),
   inProgress("Task in progress"),
   completed("Task completed"),
@@ -1512,33 +1538,37 @@ enum TaskStatus{
   @override
   String toString() => description;
 }
+
 final sayHi = (nickname) => "Hi, $nickname";
-final String Function(String) sayHi1 = (String nickname) =>"Hello, $nickname";
+final String Function(String) sayHi1 = (String nickname) => "Hello, $nickname";
 
 typedef Greet = String Function(String);
 //typedef String Greet(String name);
-void welcome(Greet greet,String nickname){
+void welcome(Greet greet, String nickname) {
   print(greet(nickname));
   print("Welcome!");
 }
+
 // typedef f = void Function();
 typedef void f();
-void runCallback(void Function() printCallback){
+void runCallback(void Function() printCallback) {
   print("Before callback");
   printCallback();
   print("Before callback");
 }
-void printMessage(){
+
+void printMessage() {
   print("Hello from callback!");
 }
 
 typedef void IntCallback(int);
-void process(IntCallback printCallback){
-  for(int i=0; i<3;i++){
+void process(IntCallback printCallback) {
+  for (int i = 0; i < 3; i++) {
     printCallback(i);
   }
 }
-int multiply(int a,int b) => a * b;
+
+int multiply(int a, int b) => a * b;
 
 String value = 'Hello';
 String toUpper(s) => s.toUpperCase();
@@ -1546,40 +1576,43 @@ String addBrackets(s) => '[$s]';
 String addExclamation(s) => '$s!';
 
 typedef String Formatter(String value);
-void formatAndPrint(Formatter f,String value){
+void formatAndPrint(Formatter f, String value) {
   print(f(value));
 }
 
-Function makeCounter(){
+Function makeCounter() {
   int count = 0;
-  return(){
+  return () {
     count++;
     print(count);
   };
 }
 
-void greetUser(String name){
+void greetUser(String name) {
   String upperName = name.toUpperCase();
-  void greetName(upperName){
+  void greetName(upperName) {
     print("HELLO, $upperName!");
   }
+
   greetName(upperName);
 }
 
-void runTwice(void Function() f){
+void runTwice(void Function() f) {
   f();
   f();
 }
 
-void runWithMessage(String message,void Function() f){
+void runWithMessage(String message, void Function() f) {
   print(message);
   f();
 }
+
 typedef functiontype = void Function(String s);
-void runWithMessage1(functiontype f){
+void runWithMessage1(functiontype f) {
   print("Start");
   f("from callback");
 }
+
 typedef trasformSquare = int Function(int);
 
 int squareNum(int num) {
@@ -1592,6 +1625,7 @@ int calculateAll(List<int> numbers, trasformSquare f) {
   int sumNum = transformed.fold(0, (i, k) => i + k);
   return sumNum;
 }
+
 typedef BoolCheck = bool Function(int);
 List<int> filterByConditions(List<int> numbers, List<BoolCheck> functions) {
   return numbers.where((number) {
@@ -1601,14 +1635,21 @@ List<int> filterByConditions(List<int> numbers, List<BoolCheck> functions) {
     return true;
   }).toList();
 }
+
 typedef emptyf = void Function();
-void runTaskWithState(String taskName,emptyf f){
+void runTaskWithState(String taskName, emptyf f) {
   f();
 }
-emptyf createTaskRunner(String taskName){
+
+emptyf createTaskRunner(String taskName) {
   int count = 0;
-  return() {
-    count ++;
+  return () {
+    count++;
     print("[$taskName] 실행 횟수: $count");
   };
+}
+
+class MyData {
+  final int value;
+  MyData(this.value);
 }
